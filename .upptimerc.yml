@@ -1,0 +1,259 @@
+owner: scenecheck-app
+repo: scenecheck-status
+user-agent: SceneCheck Status
+
+sites:
+  - name: API
+    url: https://api.scenecheck.app/api/health
+    expectedStatusCodes:
+      - 200
+    maxResponseTime: 5000
+
+  - name: Website
+    url: https://scenecheck.app
+    expectedStatusCodes:
+      - 200
+
+  - name: Admin Panel
+    url: https://admin.scenecheck.app
+    expectedStatusCodes:
+      - 200
+
+status-website:
+  cname: status.scenecheck.app
+  name: SceneCheck Status
+  theme: dark
+  favicon: https://scenecheck.app/favicon.ico
+  navbar:
+    - title: Status
+      href: /
+    - title: SceneCheck
+      href: https://scenecheck.app
+  css: |
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+
+    /* ── Brand tokens ─────────────────────────────────── */
+    :root {
+      --brand-bg-deep: #0a0908;
+      --brand-bg: #141210;
+      --brand-bg-elevated: #1e1c19;
+      --brand-cream: #e2dcd0;
+      --brand-gold: #a89882;
+      --brand-purple: #7c6af7;
+      --brand-purple-hover: #6b59e6;
+      --brand-border: rgba(226, 220, 208, 0.1);
+      --brand-border-subtle: rgba(226, 220, 208, 0.06);
+      --brand-text-secondary: rgba(226, 220, 208, 0.6);
+      --brand-text-muted: rgba(226, 220, 208, 0.4);
+    }
+
+    /* ── Base ──────────────────────────────────────────── */
+    body, html {
+      background: var(--brand-bg-deep) !important;
+      color: var(--brand-cream) !important;
+      font-family: 'DM Sans', -apple-system, sans-serif !important;
+    }
+
+    main, #sapper {
+      background: var(--brand-bg-deep) !important;
+    }
+
+    /* ── Typography ───────────────────────────────────── */
+    h1 {
+      font-family: 'Outfit', sans-serif !important;
+      font-weight: 700 !important;
+      color: var(--brand-cream) !important;
+      letter-spacing: -0.5px;
+    }
+
+    h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif !important;
+      font-weight: 600 !important;
+      color: var(--brand-cream) !important;
+    }
+
+    p, span, div {
+      color: var(--brand-cream);
+    }
+
+    /* ── Navbar ────────────────────────────────────────── */
+    nav {
+      background: var(--brand-bg) !important;
+      border-bottom: 1px solid var(--brand-border) !important;
+    }
+
+    nav a {
+      color: var(--brand-cream) !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-weight: 500 !important;
+    }
+
+    nav a:hover {
+      color: var(--brand-purple) !important;
+    }
+
+    /* ── Status cards (article.up / article.down / article.degraded) ── */
+    article.up {
+      background: var(--brand-bg-elevated) !important;
+      border: 1px solid var(--brand-border) !important;
+      border-left: 3px solid var(--brand-purple) !important;
+      border-radius: 12px !important;
+    }
+
+    article.down {
+      background: var(--brand-bg-elevated) !important;
+      border: 1px solid rgba(217, 85, 85, 0.2) !important;
+      border-left: 3px solid #d95555 !important;
+      border-radius: 12px !important;
+    }
+
+    article.degraded {
+      background: var(--brand-bg-elevated) !important;
+      border: 1px solid rgba(212, 152, 56, 0.15) !important;
+      border-left: 3px solid #d49838 !important;
+      border-radius: 12px !important;
+    }
+
+    /* Service name links inside cards */
+    article.up a, article.down a, article.degraded a {
+      color: var(--brand-cream) !important;
+      font-family: 'Outfit', sans-serif !important;
+      font-weight: 600 !important;
+    }
+
+    article.up a:hover, article.down a:hover, article.degraded a:hover {
+      color: var(--brand-purple) !important;
+    }
+
+    /* ── "All systems operational" banner ──────────────── */
+    /* First article is the status banner, not a service card */
+    main > article.up:first-of-type {
+      background: rgba(124, 106, 247, 0.08) !important;
+      border: 1px solid rgba(124, 106, 247, 0.2) !important;
+      border-left: 3px solid var(--brand-purple) !important;
+      border-radius: 12px !important;
+    }
+
+    /* ── Graph page detail cards ──────────────────────── */
+    article.up.link.graph {
+      background: var(--brand-bg-elevated) !important;
+      border: 1px solid var(--brand-border) !important;
+      border-left: 3px solid var(--brand-purple) !important;
+      border-radius: 12px !important;
+    }
+
+    /* ── Links (not in nav, not in headings) ─────────── */
+    main a {
+      color: var(--brand-purple) !important;
+    }
+
+    main a:hover {
+      color: var(--brand-purple-hover) !important;
+    }
+
+    /* Heading links should be cream, not purple */
+    h1 a, h2 a, h3 a {
+      color: var(--brand-cream) !important;
+    }
+
+    h1 a:hover, h2 a:hover, h3 a:hover {
+      color: var(--brand-gold) !important;
+    }
+
+    /* ── Status badge (span.tag.up / .down / .degraded) ── */
+    span.tag.up {
+      background: rgba(124, 106, 247, 0.15) !important;
+      border: 1px solid rgba(124, 106, 247, 0.3) !important;
+      color: var(--brand-purple) !important;
+    }
+
+    span.tag.down {
+      background: rgba(217, 85, 85, 0.12) !important;
+      border: 1px solid rgba(217, 85, 85, 0.2) !important;
+      color: #d95555 !important;
+    }
+
+    span.tag.degraded {
+      background: rgba(212, 152, 56, 0.08) !important;
+      border: 1px solid rgba(212, 152, 56, 0.15) !important;
+      color: #d49838 !important;
+    }
+
+    /* ── Tables ────────────────────────────────────────── */
+    th {
+      background: var(--brand-bg) !important;
+      color: var(--brand-gold) !important;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1.5px !important;
+      border-bottom: 1px solid var(--brand-border) !important;
+    }
+
+    td {
+      background: var(--brand-bg-elevated) !important;
+      color: var(--brand-cream) !important;
+      border-bottom: 1px solid var(--brand-border-subtle) !important;
+    }
+
+    /* ── Monospace ─────────────────────────────────────── */
+    code, pre {
+      font-family: 'JetBrains Mono', monospace !important;
+      color: var(--brand-gold) !important;
+    }
+
+    /* ── Footer ────────────────────────────────────────── */
+    footer {
+      background: var(--brand-bg-deep) !important;
+      border-top: 1px solid var(--brand-border) !important;
+      color: var(--brand-text-muted) !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 13px !important;
+    }
+
+    /* Hide repo link */
+    footer a[href*="github.com/scenecheck-app"],
+    footer a[href*="scenecheck-status"] {
+      font-size: 0 !important;
+      pointer-events: none !important;
+    }
+
+    footer a[href*="upptime"] {
+      color: var(--brand-text-muted) !important;
+      pointer-events: none !important;
+    }
+
+    /* ── Selection ─────────────────────────────────────── */
+    ::selection {
+      background: rgba(124, 106, 247, 0.3);
+      color: var(--brand-cream);
+    }
+
+    /* ── Scrollbar ─────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--brand-bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(226, 220, 208, 0.15); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(226, 220, 208, 0.25); }
+
+    /* ── Inputs ────────────────────────────────────────── */
+    input, select, textarea {
+      background: rgba(226, 220, 208, 0.06) !important;
+      border: 1px solid var(--brand-border) !important;
+      border-radius: 12px !important;
+      color: var(--brand-cream) !important;
+      font-family: 'DM Sans', sans-serif !important;
+    }
+  js: |
+    // Rewrite footer: remove repo link, keep "powered by Upptime" as plain text
+    function fixFooter() {
+      var footer = document.querySelector('footer');
+      if (!footer) return;
+      footer.innerHTML = '<p style="color:rgba(226,220,208,0.4);font-size:13px;font-family:DM Sans,sans-serif;text-align:center;padding:16px 0;margin:0;">This page is open source, powered by Upptime</p>';
+    }
+    // Run after Svelte hydration
+    if (document.readyState === 'complete') { fixFooter(); }
+    else { window.addEventListener('load', fixFooter); }
+    // Also run on a short delay for Sapper client-side navigation
+    setTimeout(fixFooter, 500);
+    setTimeout(fixFooter, 1500);
